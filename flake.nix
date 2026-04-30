@@ -32,7 +32,7 @@
           username = "liquid";
           # extraPackages = with pkgs; [ ];
           extraModules = [{
-            home.file.".zprofile".text = ''
+            programs.zsh.profileExtra = ''
               echo ""
               echo "========================================"
               echo "  Managed by Nix Home Manager"

@@ -61,16 +61,6 @@
       force = true;
     };
 
-    ".zshrc".text = ''
-      if [ -d "$HOME/.nix-profile/bin" ]; then
-          export PATH="$HOME/.nix-profile/bin:$PATH"
-      fi
-
-      if [ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ] ; then
-          . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-      fi
-    '';
-
     ".config/fish/conf.d/nix-home-manager.fish".text = ''
       if test -d ~/.nix-profile/bin
           fish_add_path --prepend ~/.nix-profile/bin
@@ -84,6 +74,26 @@
 
   home.sessionVariables = {
     EDITOR = "neovim";
+  };
+
+  programs.zsh = {
+    enable = true;
+
+    envExtra = ''
+      if [ -d "$HOME/.nix-profile/bin" ]; then
+          export PATH="$HOME/.nix-profile/bin:$PATH"
+      fi
+
+      if [ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ] ; then
+          . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+      fi
+    '';
+
+    profileExtra = ''
+      if [ -d "$HOME/.nix-profile/bin" ]; then
+          export PATH="$HOME/.nix-profile/bin:$PATH"
+      fi
+    '';
   };
 
   programs.home-manager.enable = true;
