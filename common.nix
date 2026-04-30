@@ -31,7 +31,7 @@
     clang-tools
     ccache
     sccache
-    direnv
+    (direnv.overrideAttrs (_: { doCheck = false; }))
 
     glances
     iftop
